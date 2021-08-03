@@ -37,14 +37,14 @@ const App = () => {
 
   return (
     <div className="container-fluid p-0">
-      <HeaderComponent searchCallback={(query) => setSearchQuery(query)}/>
+      <HeaderComponent searchQuery={searchQuery} searchCallback={(query) => setSearchQuery(query)}/>
       <main className="container-fluid p-0">
         <Switch >
           <Route exact path="/" >
             <MoviesComponent searchQuery={searchQuery} clearSearchCallback={() => setSearchQuery('')}/>
           </Route>
           <Route exact path="/movie/:movieid">
-            <MovieComponent />
+            <MovieComponent searchQuery={searchQuery} clearSearchCallback={() => setSearchQuery('')}/>
           </Route>
           <Route exact path="/login">
             <LoginComponent />

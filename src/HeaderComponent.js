@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const HeaderComponent = (props) => {
   const [ searchQuery, setSearchQuery ] = useState('')
+  const history = useHistory();
 
   const handleSearchQueryChange = (event) => {
     const value = event.target.value;
@@ -10,8 +12,16 @@ const HeaderComponent = (props) => {
   };
 
   const handleSearchClick = (event) => {
+    event.preventDefault();
     props.searchCallback(searchQuery)
+    history.push(`/`);
   };
+
+  useEffect(() => {
+    if (props.searchQuery === '') {
+      setSearchQuery('');
+    }
+  }, [props.searchQuery]);
 
   return (
     <header className="p-3 bg-dark text-white">
@@ -44,6 +54,7 @@ const HeaderComponent = (props) => {
               placeholder="Search..."
               aria-label="Search"
               onChange={handleSearchQueryChange}
+              value={searchQuery}
             />
           </form>
 

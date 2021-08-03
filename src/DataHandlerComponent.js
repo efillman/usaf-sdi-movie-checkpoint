@@ -35,6 +35,7 @@ class DataHandlerComponent {
   // POST http://localhost:3001/reviews - creates a new review, returns success status in JSON response
   //data {"email":"test@test.com","movieId":1,"reviewTitle":"test test","reviewText":"test test test"}
   postReview = async (data) => {
+    console.log(data)
     if (data.email && data.movieId && data.reviewTitle && data.reviewText) {
       try {
         const response = await fetch('http://localhost:3001/reviews', {
@@ -56,6 +57,7 @@ class DataHandlerComponent {
   // POST http://localhost:3001/register - creates a new user, returns success status in JSON response
   //data = {"email": "test@test.com", "password": "password"}
   postRegister = async (data) => {
+    console.log(data)
     if (data.email && data.password) {
       try {
         const response = await fetch('http://localhost:3001/register', {
