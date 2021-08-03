@@ -1,23 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import DataHandlerComponent from './DataHandlerComponent';
+import React, {useState, useEffect} from "react"
 
-function App() {
+const App = () => {
+  const [ data, setData ] = useState([])
+  const [ isLoading, setIsLoading ] = useState(true)
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    const dataHandler = new DataHandlerComponent();
+    dataHandler.getMovies().then((data) => setData(data)).then(() => setIsLoading(false))
+    //dataHandler.getMovie(1).then((data) => setData(data)).then(() => setIsLoading(false))
+    //dataHandler.getSearch("Birds").then((data) => setData(data)).then(() => setIsLoading(false))
+    //dataHandler.getReviews(1).then((data) => setData(data)).then(() => setIsLoading(false))
+    // const reviewData = {email:"test@test.com",movieId:1,reviewTitle:"test test",reviewText:"test test test"};
+    // dataHandler.postReview(reviewData).then((data) => setData(data)).then(() => setIsLoading(false))
+    // const registerData = {email:"test@test.com",password:"password"};
+    // dataHandler.postRegister(registerData).then((data) => setData(data)).then(() => setIsLoading(false))
+
+  }, []);
+
+  const loadingText = () => {
+    return (<div>Loading</div>)
+  }
+
+  const outputText = () => {
+    return (<div>{data[0].title}</div>)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isLoading ? loadingText() : outputText()}
     </div>
   );
 }
