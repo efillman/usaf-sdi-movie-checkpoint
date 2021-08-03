@@ -36,22 +36,21 @@ const MoviesComponent = (props) => {
 
   const outputText = () => {
     let output = data.map((movie, each) => {
-      return <MoviesComponentCard key={each} id={each} data={movie} />
+      return <MoviesComponentCard key={each+1} id={each+1} data={movie} />
     })
 
     return (output)
   }
 
   return (
-
     <section className="row">
-      <div className="row justify-conent-center text-center">
       <div className="col">
-        {searchQuery ? displayClearButton() : <div></div>}
-      </div>
-    </div>
-    <div className="row">
-      {isLoading ? loadingText() : outputText()}
+        <div className="row justify-conent-center text-center">
+          <div className="col">
+            {searchQuery ? displayClearButton() : <div></div>}
+          </div>
+        </div>
+        <div className="row">{isLoading ? loadingText() : outputText()}</div>
       </div>
     </section>
   )
